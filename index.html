@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBR Service | Главная</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           1. ПЕРЕМЕННЫЕ (Меняй цвета здесь под дизайн)
+           ========================================= */
+           :root {
+    --accent-color: #ffffff;       /* Теперь акцентный цвет — белый */
+    --accent-hover: #e2e8f0;       /* Цвет при наведении — светло-серый */
+    
+    --bg-body: #000000;           /* Абсолютно чёрный фон для всего сайта */
+    --bg-section: #000000;        /* Никаких серых блоков, везде чистый чёрный */
+    
+    --text-main: #ffffff;         /* Главный текст — чисто белый */
+    --text-muted: #a3a3a3;        /* Дополнительный текст — красивый светло-серый */
+    
+    --border-color: #262626;      /* Тонкие, едва заметные тёмные рамки */
+    --radius: 4px;                /* Чуть более строгие скругления углов */
+}
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-title { font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 50px; }
+
+        /* =========================================
+           2. ШАПКА И НАВИГАЦИЯ
+           ========================================= */
+           .header {
+            position: absolute; /* Чтобы шапка легла поверх фоновой картинки */
+            top: 0; left: 0; right: 0;
+            padding: 25px 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Логотип */
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+        .logo-sub {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 16px;
+        }
+        /* Телефон в шапке */
+        .header-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        .header-phone:hover { opacity: 0.8; }
+        
+        /* Главный экран с фоном */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* Градиент затемняет картинку, чтобы текст был контрастным. Заглушка вместо картинки. */
+            background-image: 
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.95)),
+                url('https://placehold.co/1920x1080/1e293b/ffffff?text=ФОТО+МАСТЕРА+ЗА+РАБОТОЙ');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding-top: 80px; /* Отступ для шапки */
+        }
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 20px;
+            color: #cccccc;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        /* Главная кнопка */
+        .hero .btn {
+            display: inline-block;
+            background: #ffffff;
+            color: #000000;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .hero .btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           4. БЛОК О НАС / ПРЕИМУЩЕСТВА (Стандартные блоки)
+           ========================================= */
+/* =========================================
+           БЛОК "ПОЧЕМУ ВЫБИРАЮТ НАС"
+           ========================================= */
+           .features { padding: 100px 0; background: #000000; }
+        .features .section-title { text-align: left; margin-bottom: 15px; }
+        
+        /* Текст-описание под заголовком */
+        .features-description { 
+            text-align: left; 
+            color: var(--text-muted); 
+            margin-bottom: 50px; 
+            line-height: 1.6; 
+            max-width: 900px; 
+            font-size: 15px; 
+        }
+        
+        .features-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 30px; /* Отступы между карточками */
+        }
+        
+        /* Дизайн самой карточки */
+        .feature-card { 
+            background: #1a1a1a; /* Темно-серый фон карточки как на макете */
+            padding: 40px; 
+            border-radius: 6px; 
+            border: 1px solid #2a2a2a; 
+            text-align: left; /* Текст строго по левому краю */
+            transition: border-color 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: #444444; /* Легкое подсвечивание рамки при наведении */
+        }
+        
+        /* Круглая подложка для иконки */
+        .feature-icon-wrapper { 
+            width: 50px; 
+            height: 50px; 
+            background: #e2e8f0; /* Светлый круг */
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 25px; 
+        }
+        
+        /* Цвет самой иконки внутри круга */
+        .feature-icon-wrapper svg {
+            color: #1e293b; 
+            width: 24px;
+            height: 24px;
+        }
+        
+        .feature-card h3 { 
+            font-size: 20px; 
+            margin-bottom: 12px; 
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .feature-card p { 
+            color: var(--text-muted); 
+            font-size: 15px; 
+            line-height: 1.5;
+            margin: 0;
+        }
+        /* =========================================
+           БЛОК "КАКУЮ ТЕХНИКУ РЕМОНТИРУЕМ"
+           ========================================= */
+           .equipment { padding: 100px 0; background: var(--bg-body); }
+        .equipment .section-title { text-align: left; margin-bottom: 40px; font-size: 32px; }
+        
+        .equip-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* Две колонки */
+            gap: 40px; /* Расстояние между карточками */
+        }
+        
+        .equip-item { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 20px; 
+        }
+        
+        .equip-item img { 
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover; 
+            border-radius: var(--radius); 
+            flex-shrink: 0; /* Чтобы картинка не сжималась */
+        }
+        
+        .equip-info h3 { 
+            font-size: 18px; 
+            margin-bottom: 8px; 
+            text-decoration: underline; /* Подчеркивание как на макете */
+            text-underline-offset: 4px; /* Делает подчеркивание более аккуратным */
+            color: var(--text-main);
+        }
+        
+        .equip-info p { 
+            font-size: 14px; 
+            color: var(--text-muted); 
+            line-height: 1.5; 
+        }
+
+        /* Кнопка как на картинке (белая с черным текстом) */
+        .btn-white {
+            display: inline-block; padding: 14px 32px;
+            background: #ffffff; color: #000000;
+            font-size: 16px; font-weight: 700;
+            border-radius: var(--radius); border: none;
+            cursor: pointer; transition: background 0.3s;
+            margin-top: 40px;
+        }
+        .btn-white:hover { background: #e2e8f0; }
+
+        
+        /* =========================================
+           5. УСЛУГИ (Сетка карточек)
+           ========================================= */
+        /* Блок "Наши услуги" */
+.services { padding: 100px 0; background: var(--bg-body); }
+.services .section-title { text-align: left; margin-bottom: 20px; }
+.services-description { color: var(--text-muted); margin-bottom: 50px; max-width: 800px; }
+
+.services-list { display: flex; flex-direction: column; gap: 20px; }
+
+.service-item { 
+    display: flex; 
+    align-items: flex-start; 
+    background: var(--bg-section); 
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 30px;
+    gap: 30px;
+}
+
+/* Стиль для номера */
+.service-number { 
+    font-size: 32px; 
+    font-weight: 800; 
+    color: var(--text-muted); 
+    min-width: 40px; 
+}
+
+.service-content h3 { font-size: 20px; margin-bottom: 10px; color: var(--text-main); }
+.service-content p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+
+/* Блок "Гарантия скорости" */
+.speed-guarantee { 
+    margin-top: 20px;
+    padding: 30px;
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.speed-icon { font-size: 30px; }
+
+        /* =========================================
+           6. ФОРМА ЗАЯВКИ
+           ========================================= */
+        /* =========================================
+           ФОРМА ЗАЯВКИ
+           ========================================= */
+           .request-section {
+            padding: 100px 0;
+            background: #000000;
+        }
+        .request-section .section-title { text-align: center; margin-bottom: 50px; }
+        
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #121212;
+            padding: 50px 40px;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .form-group { margin-bottom: 25px; }
+        
+        .form-group label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            background: #000000;
+            border: 1px solid #333333;
+            color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        .form-group input:focus { border-color: #ffffff; }
+        
+        .btn-submit {
+            width: 100%;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover { background: #e2e8f0; }
+
+        /* =========================================
+           7. ПОДВАЛ
+           ========================================= */
+        footer { background: var(--text-main); color: #0f172a; padding: 40px 0; text-align: center; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .logo-sub { display: none; } /* Скрываем приписку на мобильных, чтобы влез номер */
+            .header-phone { font-size: 16px; }
+            .contact-wrap { padding: 30px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .equip-grid { grid-template-columns: 1fr; gap: 25px; }
+            .equipment .section-title { text-align: center; font-size: 28px; }
+            .equip-item img { width: 80px; height: 80px; }
+            .reviews-grid { grid-template-columns: 1fr; gap: 40px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; padding-top: 40px; }
+            .reviews-section .section-title { text-align: center; }
+            .reviews-description { text-align: center; }
+            .team-grid { gap: 30px; }
+            .team-member { width: 160px; }
+            .team-member img { width: 160px; height: 160px; }
+            .contact-top-grid { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .special-offer-box { flex-direction: column; gap: 15px; }
+            .form-wrapper { padding: 30px 20px; }
+        }
+
+        /* =========================================
+           БЛОК ОТЗЫВОВ И СТАТИСТИКИ
+           ========================================= */
+           .reviews-section { padding: 100px 0; background: #000000; }
+        .reviews-section .section-title { text-align: left; margin-bottom: 20px; }
+        
+        .reviews-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 30px; 
+            margin-bottom: 80px; 
+        }
+        
+        /* Карточка отзыва с рамками и кавычками 1:1 как на фото */
+        .review-card {
+            border: 1px solid #333333;
+            padding: 40px 30px;
+            position: relative;
+            background: transparent;
+        }
+        /* Верхняя кавычка */
+        .review-card::before {
+            content: "“";
+            position: absolute;
+            top: -18px; left: 15px;
+            font-size: 45px; font-family: serif; color: #ffffff; 
+            background: #000000; padding: 0 8px; line-height: 1;
+        }
+        /* Нижняя кавычка */
+        .review-card::after {
+            content: "”";
+            position: absolute;
+            bottom: -32px; right: 15px;
+            font-size: 45px; font-family: serif; color: #ffffff; 
+            background: #000000; padding: 0 8px; line-height: 1;
+        }
+        
+        .review-author { font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #ffffff; }
+        .review-text { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+
+        /* Сетка для цифр/статистики */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            border-top: 1px solid #222222;
+            padding-top: 60px;
+        }
+        .stat-item { text-align: center; }
+        .stat-item h3 { font-size: 48px; font-weight: 800; color: #ffffff; margin-bottom: 10px; font-family: 'Inter', sans-serif; }
+        .stat-item .stat-label { font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+        .stat-item .stat-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+
+        /* =========================================
+           БЛОК "НАША КОМАНДА"
+           ========================================= */
+           .team-section { padding: 100px 0; background: #000000; }
+        .team-section .section-title { text-align: left; margin-bottom: 20px; }
+        
+        .team-desc { 
+            color: var(--text-muted); 
+            margin-bottom: 50px; 
+            max-width: 900px; 
+            line-height: 1.6; 
+            font-size: 15px; 
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Центрируем, чтобы нижние двое встали по центру */
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .team-member {
+            width: 220px;
+            text-align: left;
+        }
+
+        .team-member img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        .team-member h3 { font-size: 18px; color: #ffffff; margin-bottom: 5px; }
+        .team-member p { font-size: 14px; color: var(--text-muted); }
+
+        /* =========================================
+           БЛОК "СВЯЖИТЕСЬ С НАМИ И ЭТАПЫ"
+           ========================================= */
+        .contact-new-section { padding: 0 0 100px 0; background: #000000; }
+        .contact-new-section .section-title { text-align: left; margin-bottom: 40px; }
+
+        /* Верхняя часть: Контакты + Картинка */
+        .contact-top-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .contact-item h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        
+        .contact-item h4 svg { width: 20px; height: 20px; color: #ef4444; /* Красный акцент для иконок */ }
+
+        .contact-item .c-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .contact-item .c-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+        
+        .contact-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+
+        /* Нижняя часть: 4 шага */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .process-step .p-num { font-size: 14px; color: #ffffff; font-weight: 700; margin-bottom: 10px; }
+        .process-step .p-line { width: 100%; height: 1px; background: #333; margin-bottom: 15px; }
+        .process-step h4 { font-size: 15px; color: #ffffff; margin-bottom: 10px; line-height: 1.4; }
+        .process-step p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+        /* Спецпредложение */
+        .special-offer-box {
+            background: #121212;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .special-offer-box svg { width: 24px; height: 24px; color: #f59e0b; flex-shrink: 0; margin-top: 2px; }
+        .special-offer-box h4 { font-size: 18px; color: #ffffff; margin-bottom: 8px; }
+        .special-offer-box p { font-size: 14px; color: #cccccc; line-height: 1.5; margin: 0; }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-text">SBR</span>
+                <span class="logo-sub">service</span>
+            </a>
+            
+            <a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" class="header-phone" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                +7 (700) 501-90-00
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>SBR service — Служба Быстрого<br>Реагирования</h1>
+            <p>Профессиональный ремонт бытовой техники в Астане.<br>Быстро, качественно, с гарантией от 12 месяцев.</p>
+            <a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" class="btn" target="_blank">Вызвать мастера</a>
+        </div>
+    </section>
+
+    <section id="about" class="features">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают SBR service?</h2>
+            <p class="features-description">Мы — команда профессионалов с более чем 12-летним опытом в ремонте любой техники от мелкой бытовой техники до промышленных агрегатов. Наши специалисты прошли обучение и сертификацию по работе с ведущими брендами техники. Мы используем только оригинальные запчасти и современное диагностическое оборудование.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                            <path d="M9 16l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3>12+ лет опыта</h3>
+                    <p>Успешная работа и тысячи довольных клиентов по всей Астане</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M9 12l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3>Гарантия 12 месяцев</h3>
+                    <p>Уверенность в качестве выполненных работ и установленных деталей</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="13" r="8"></circle>
+                            <polyline points="12 9 12 13 14 15"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="4"></line>
+                            <line x1="10" y1="2" x2="14" y2="2"></line>
+                        </svg>
+                    </div>
+                    <h3>Быстрый выезд</h3>
+                    <p>Мастер приедет в течение 40 минут после вашего звонка</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                        </svg>
+                    </div>
+                    <h3>Любая сложность</h3>
+                    <p>От простой очистки до сложного ремонта электроники</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipment" class="equipment">
+        <div class="container">
+            <h2 class="section-title">Какую технику мы ремонтируем?</h2>
+            
+            <div class="equip-grid">
+                
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Посудомойка" alt="Посудомоечные машины">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Посудомоечные машины</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, AEG, Zanussi и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Стиралка" alt="Стиральные машины">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Стиральные машины</a></h3>
+                        <p>Miele, LG, Samsung, Bosch, Siemens, Electrolux, Ariston, Indesit, Candy, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Холодильник" alt="Холодильники">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Холодильники</a></h3>
+                        <p>Miele, LG, Samsung, Bosch, Siemens, Electrolux, Ariston, Indesit, Gorenje, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Духовки и плиты">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Духовки и плиты</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Микроволновые печи">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Микроволновые печи</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Телевизоры">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Телевизоры</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Приставки и медиаплееры">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Приставки и медиаплееры</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Кондиционеры">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Кондиционеры</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Блендеры и кухонные комбайны">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Блендеры и кухонные комбайны</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Кофемашины и кофеварки">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Кофемашины и кофеварки</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Чайники и водонагреватели">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Чайники и водонагреватели</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Пылесосы">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Пылесосы</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Утюги и отпариватели">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Утюги и отпариватели</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Фены и фены-щетки">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Фены и фены-щетки</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Мультиварки и скороварки">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Мультиварки и скороварки</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Хлебопечки и йогуртницы">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Хлебопечки и йогуртницы</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Стиральные машины с сушкой">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Стиральные машины с сушкой</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Посудомоечные машины компактные">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Посудомоечные машины компактные</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+
+                <div class="equip-item">
+                    <img src="https://placehold.co/120x120/1e293b/ffffff?text=Духовка" alt="Другая бытовая техника">
+                    <div class="equip-info">
+                        <h3><a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank">Другая бытовая техника</a></h3>
+                        <p>Miele, Bosch, Siemens, Electrolux, Ariston, Candy, Gorenje, Zanussi, AEG и другие</p>
+                    </div>
+                </div>
+                
+                </div>
+
+            <a href="#contact" class="btn-white">Заказать ремонт</a>
+            
+        </div>
+    </section>
+
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги — полный спектр ремонта</h2>
+            <p class="services-description">SBR-service предлагает комплексный подход к ремонту техники. Мы выполняем все виды работ — от простой профилактики до сложного восстановления электронных систем управления.</p>
+            
+            <div class="services-list">
+                <div class="service-item">
+                    <div class="service-number">1</div>
+                    <div class="service-content">
+                        <h3>Бесплатная диагностика</h3>
+                        <p>Выезд мастера в течение 15 минут. Полная диагностика неисправностей с использованием профессионального оборудования. Определение точной причины поломки и расчет стоимости ремонта на месте.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-number">2</div>
+                    <div class="service-content">
+                        <h3>Замена компонентов</h3>
+                        <p>Ремонт и замена насосов, нагревательных элементов (ТЭНов), впускных клапанов, датчиков уровня воды, температурных датчиков, уплотнителей дверцы. Используем только оригинальные запчасти.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-number">3</div>
+                    <div class="service-content">
+                        <h3>Очистка систем</h3>
+                        <p>Профессиональная чистка фильтров, форсунок распыления, систем слива и подачи воды. Удаление накипи, жировых отложений и засоров. Профилактика для продления срока службы техники.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-number">4</div>
+                    <div class="service-content">
+                        <h3>Ремонт электроники</h3>
+                        <p>Восстановление электронных модулей управления, перепрошивка программного обеспечения, ремонт дисплеев и панелей управления. Диагностика сложных электронных неисправностей.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-number">5</div>
+                    <div class="service-content">
+                        <h3>Консультации</h3>
+                        <p>Подробные рекомендации по правильной эксплуатации посудомоечной машины. Советы по профилактике поломок и уходу за техникой. Подбор моющих средств и режимов работы.</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="speed-guarantee">
+                <div class="speed-icon">⚡</div>
+                <div>
+                    <h3>Гарантия скорости</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Большинство ремонтов мы выполняем за 1 день, за исключением работ по силовым модулям.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <h2 class="section-title">Отзывы наших клиентов</h2>
+            <p class="services-description" style="margin-bottom: 50px;">Мы гордимся доверием наших клиентов. За годы работы сотни жителей Астаны выбрали SBR-service для ремонта своих посудомоечных машин. Читайте реальные отзывы людей, которые уже оценили качество нашей работы.</p>
+            
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-author">Марина К.</div>
+                    <div class="review-text">SBR service быстро приехали после моего звонка, провели диагностику и заменили насос прямо на месте. Работа заняла всего полтора часа! Дали гарантию на целый год. Машина теперь работает как новая, даже тише стала. Очень благодарна за профессионализм!</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-author">Алексей П.</div>
+                    <div class="review-text">Обращался в несколько сервисов, но только здесь мне честно рассказали о проблеме и предложили адекватную цену. Профессиональный подход виден сразу — мастер объяснил все детали, показал неисправную деталь. Ремонт сделали за один день. Однозначно рекомендую!</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-author">Светлана Т.</div>
+                    <div class="review-text">Очень удобно, что выезд мастера бесплатный и диагностика тоже не стоит денег. Приехали точно в назначенное время, быстро нашли проблему. Цены разумные, работают аккуратно, убрали за собой. Теперь только к ним буду обращаться, если что. Надежный сервис!</div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>12+</h3>
+                    <div class="stat-label">Лет опыта</div>
+                    <div class="stat-desc">Профессиональная работа с 2013 года</div>
+                </div>
+                <div class="stat-item">
+                    <h3>3500+</h3>
+                    <div class="stat-label">Довольных клиентов</div>
+                    <div class="stat-desc">Успешно выполненных ремонтов</div>
+                </div>
+                <div class="stat-item">
+                    <h3>99%</h3>
+                    <div class="stat-label">Ремонт с первого раза</div>
+                    <div class="stat-desc">Высокая точность диагностики</div>
+                </div>
+                <div class="stat-item">
+                    <h3>40</h3>
+                    <div class="stat-label">Минут до выезда</div>
+                    <div class="stat-desc">Быстрое реагирование на заявки</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Наша команда профессионалов</h2>
+            <p class="team-desc">В SBR-service работают только опытные и квалифицированные специалисты, которые любят свою работу. Каждый мастер проходит регулярное обучение и имеет доступ к самым современным инструментам и диагностическому оборудованию. Мы гордимся нашей командой, которая гарантирует высокое качество ремонта.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://placehold.co/300x300/1e293b/ffffff?text=Фото+1" alt="Александр">
+                    <h3>Александр</h3>
+                    <p>Главный инженер</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://placehold.co/300x300/1e293b/ffffff?text=Фото+2" alt="Елена">
+                    <h3>Елена</h3>
+                    <p>Ведущий специалист по электронике</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://placehold.co/300x300/1e293b/ffffff?text=Фото+3" alt="Сергей">
+                    <h3>Сергей</h3>
+                    <p>Мастер по ремонту</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://placehold.co/300x300/1e293b/ffffff?text=Фото+4" alt="Ольга">
+                    <h3>Ольга</h3>
+                    <p>Техник по диагностике</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://placehold.co/300x300/1e293b/ffffff?text=Фото+5" alt="Иван">
+                    <h3>Иван</h3>
+                    <p>Специалист по установке</p>
+                </div>
+            </div>
+            
+            <p class="team-desc" style="margin-bottom: 0;">Наши мастера не только качественно выполняют свою работу, но и всегда готовы предоставить подробную консультацию и рекомендации по уходу за вашей посудомоечной машиной. Ваше доверие — наш главный приоритет.</p>
+        </div>
+    </section>
+
+    <section class="contact-new-section">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь с нами прямо сейчас</h2>
+            
+            <div class="contact-top-grid">
+                <div class="contact-info-list">
+                    <div class="contact-item">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Наш адрес
+                        </h4>
+                        <span class="c-val">г. Астана, ул. Кабанбай Батыра, 13</span>
+                        <div class="c-desc">Удобное расположение в центре города с бесплатной парковкой для клиентов.</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            Телефон
+                        </h4>
+                        <a href="https://api.whatsapp.com/send/?phone=%2B77005019000&text&type=phone_number&app_absent=0" target="_blank" class="c-val" style="text-decoration: none; transition: color 0.3s;">+7 700 501 9000</a>
+                        <div class="c-desc">Звоните 24/7. Мастер ответит на все ваши вопросы и приедет в удобное время.</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Режим работы
+                        </h4>
+                        <div class="c-desc">Работаем <strong>7 дней в неделю 24 часа в сутки</strong> без выходных и праздников. Срочные заявки принимаем круглосуточно.</div>
+                    </div>
+                </div>
+                
+                <div class="contact-image">
+                    <img src="https://placehold.co/800x500/1e293b/ffffff?text=Фото+Офиса" alt="Офис SBR service">
+                </div>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="p-num">01</div>
+                    <div class="p-line"></div>
+                    <h4>Позвоните нам или оставьте заявку онлайн</h4>
+                    <p>Мастер перезвонит в течение 5 минут</p>
+                </div>
+                <div class="process-step">
+                    <div class="p-num">02</div>
+                    <div class="p-line"></div>
+                    <h4>Мастер приедет в течение 40 минут</h4>
+                    <p>Бесплатная диагностика на месте</p>
+                </div>
+                <div class="process-step">
+                    <div class="p-num">03</div>
+                    <div class="p-line"></div>
+                    <h4>Согласование стоимости ремонта</h4>
+                    <p>Прозрачные цены без скрытых платежей</p>
+                </div>
+                <div class="process-step">
+                    <div class="p-num">04</div>
+                    <div class="p-line"></div>
+                    <h4>Быстрый ремонт с гарантией 12 месяцев</h4>
+                    <p>Качественная работа за 1 день</p>
+                </div>
+            </div>
+
+            <div class="special-offer-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+                <div>
+                    <h4>Специальное предложение</h4>
+                    <p>При заказе ремонта в день обращения — <strong>скидка 10%</strong> на все виды работ! Не откладывайте ремонт на потом — позвоните сейчас и получите выгоду.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="request-section">
+        <div class="container">
+            <h2 class="section-title">Оставьте заявку</h2>
+            
+            <div class="form-wrapper">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Номер телефона</label>
+                        <input type="tel" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; SBR-service — Служба Быстрого Реагирования. Ваш надежный партнер в Астане. Доверьте свою технику профессионалам! 2026 SBR Service. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const btn = document.getElementById('submitBtn');
+            const statusDiv = document.getElementById('status');
+            
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
+            statusDiv.className = 'status-msg';
+            statusDiv.textContent = '';
+
+            try {
+                const response = await fetch('send.php', {
+                    method: 'POST',
+                    body: new FormData(form)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    statusDiv.textContent = 'Заявка отправлена!';
+                    statusDiv.classList.add('success');
+                    form.reset();
+                } else {
+                    statusDiv.textContent = result.message || 'Ошибка отправки.';
+                    statusDiv.classList.add('error');
+                }
+            } catch (error) {
+                statusDiv.textContent = 'Ошибка сети. Попробуйте позже.';
+                statusDiv.classList.add('error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Отправить';
+                setTimeout(() => {
+                    statusDiv.className = 'status-msg';
+                    statusDiv.textContent = '';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
